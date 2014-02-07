@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+body {
+	background-image: url(PIC/selectbg.png);
+}
+-->
+</style>
+<script type="text/javascript">
+var startnum=1;
+function letsfoodle(){
+	var foodleKindArray = [];
+	for(var i=1;document.getElementById('type'+i)!=null;i++)
+	{
+		if(document.getElementById('type'+i).checked == true)foodleKindArray.push(document.getElementById('type'+i).name);
+	}
+	//price
+	var pricemin;
+	var pricemax;
+	if(document.getElementById('theprice_min').value=='無限制' || document.getElementById('theprice_min').value=='')pricemin=null;
+	else if(isNaN(document.getElementById('theprice_min').value)==false)pricemin=document.getElementById('theprice_min').value;
+	else pricemin=null;
+	if(document.getElementById('theprice_max').value=='無限制' || document.getElementById('theprice_max').value=='')pricemax=null;
+	else if(isNaN(document.getElementById('theprice_max').value)==false)pricemax=document.getElementById('theprice_max').value;
+	else pricemax=null;
+	
+	//distance
+	var searchDistance=null;
+	var startPosition = null;
+	if(isNaN(document.getElementById('setDistance').value)==true || document.getElementById('setDistance').value=='')searchDistance=null;
+	else searchDistance=document.getElementById('setDistance').value;
+	
+	if(parent.startmarker!=null)startPosition=parent.startmarker.getPosition();
+	
+	
+
+	parent.showmarkerByAny(null,pricemin,pricemax,foodleKindArray,searchDistance,startPosition,null,startnum);
+}
+
+function cancelAll(){
+	for(var i=1;document.getElementById('type'+i)!=null;i++)
+		document.getElementById('type'+i).checked = false;
+}
+</script>
+
+<script type="text/javascript">
+function pressbutton(objimg){
+	if(objimg.src.search("_")==-1)objimg.src=objimg.src.substring(0,objimg.src.length-4)+"_p.png";
+	else objimg.src=objimg.src.substring(0,objimg.src.lastIndexOf("_"))+".png";
+}
+
+var imgsetstart=false;
+function changesetpic(objimg){
+	
+	if(imgsetstart==false){
+		objimg.src="PIC/setstartY.png";
+		imgsetstart=true;
+	}
+	else{
+		objimg.src="PIC/setstart.png";
+		imgsetstart=false;
+	}
+}
+
+function heart1f(){
+	document.getElementById('heart1').src="PIC/heart.png";
+	document.getElementById('heart2').src="PIC/heartnull.png";
+	document.getElementById('heart3').src="PIC/heartnull.png";
+	document.getElementById('heart4').src="PIC/heartnull.png";
+	document.getElementById('heart5').src="PIC/heartnull.png";
+	startnum=1;
+}
+function heart2f(){
+	document.getElementById('heart1').src="PIC/heart.png";
+	document.getElementById('heart2').src="PIC/heart.png";
+	document.getElementById('heart3').src="PIC/heartnull.png";
+	document.getElementById('heart4').src="PIC/heartnull.png";
+	document.getElementById('heart5').src="PIC/heartnull.png";
+	startnum=2;
+}
+function heart3f(){
+	document.getElementById('heart1').src="PIC/heart.png";
+	document.getElementById('heart2').src="PIC/heart.png";
+	document.getElementById('heart3').src="PIC/heart.png";
+	document.getElementById('heart4').src="PIC/heartnull.png";
+	document.getElementById('heart5').src="PIC/heartnull.png";
+	startnum=3;
+}
+function heart4f(){
+	document.getElementById('heart1').src="PIC/heart.png";
+	document.getElementById('heart2').src="PIC/heart.png";
+	document.getElementById('heart3').src="PIC/heart.png";
+	document.getElementById('heart4').src="PIC/heart.png";
+	document.getElementById('heart5').src="PIC/heartnull.png";
+	startnum=4;
+}
+function heart5f(){
+	document.getElementById('heart1').src="PIC/heart.png";
+	document.getElementById('heart2').src="PIC/heart.png";
+	document.getElementById('heart3').src="PIC/heart.png";
+	document.getElementById('heart4').src="PIC/heart.png";
+	document.getElementById('heart5').src="PIC/heart.png";
+	startnum=5;
+}
+
+</script>
+<script type="text/javascript" src="simpletreemenu.js">
+
+/***********************************************
+* Simple Tree Menu- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="simpletree.css" />
+<title>無標題文件</title>
+</head>
+
+<body>
+<img src="PIC/searchname.png" onclick="searchnames.style.display=searchnames.style.display=='none'?'':'none';pressbutton(this);" /><br/>
+<div id=searchnames style="display:none">
+    <form name="namesearchform">       
+        <input type="text" name="thename"><input type="button" value="Foodle!"
+        onClick="parent.showmarkerByAny(this.form.thename.value,null,null,null,null,null,null,null)">       
+        
+    </form>   
+</div> 
+
+<img src="PIC/kind.png" onclick="kinds.style.display=kinds.style.display=='none'?'':'none';pressbutton(this);" /><br/>
+    <div id=kinds style="display:none">
+	<p> 
+	<input type="button" value="全部展開" onclick="javascript:ddtreemenu.flatten('treemenu1', 'expand')">
+	<input type="button" value="全部收起" onclick="javascript:ddtreemenu.flatten('treemenu1', 'contact')"><br/>
+	<input type="button" value="全部取消勾選" onclick="javascript:cancelAll();"></p>
+
+<ul id="treemenu1" class="treeview">
+<li><label>中式餐廳</label>
+	<ul>
+	<li><label><input type="checkbox" name="中式餐廳" id="type1">所有中式餐廳</label></li>
+	<li><label><input type="checkbox" name="北京菜" id="type2">北京菜</label></li>
+	<li><label><input type="checkbox" name="四川菜" id="type3">四川菜</label></li>
+	<li><label><input type="checkbox" name="江浙菜(含湘菜)" id="type4">江浙菜(含湘菜)</label></li>
+	<li><label><input type="checkbox" name="廣東菜(含飲茶、茶餐廳)" id="type5">廣東菜(含飲茶、茶餐廳)</label></li>
+	<li><label>蒙古烤肉、新疆、西藏、陝北料理</label>
+		<ul>
+		<li><label><input type="checkbox" name="蒙古烤肉、新疆、西藏、陝北料理" id="type6">所有蒙古烤肉、新疆、西藏、陝北料理</label></li>
+		<li><label><input type="checkbox" name="蒙古風味" id="type7">蒙古風味</label></li>
+		<li><label><input type="checkbox" name="陝北風味" id="type8">陝北風味</label></li>
+		<li><label><input type="checkbox" name="新彊風味" id="type9">新彊風味</label></li>
+		<li><label><input type="checkbox" name="西藏風味" id="type10">西藏風味</label></li>
+		</ul>
+	</li>
+	<li><label>閩菜、台菜、客家料理</label>
+		<ul>
+		<li><label><input type="checkbox" name="閩菜、台菜、客家料理" id="type11">所有閩菜、台菜、客家料理</label></li>
+		<li><label><input type="checkbox" name="閩菜" id="type12">閩菜</label></li>
+		<li><label><input type="checkbox" name="客家料理" id="type13">客家料理</label></li>
+		<li><label><input type="checkbox" name="台菜料理" id="type14">台菜料理</label></li>
+		</ul>
+	</li>
+	<li><label><input type="checkbox" name="海鮮、熱炒" id="type15">海鮮、熱炒</label></li>
+	<li><label><input type="checkbox" name="雲南、貴州料理" id="type16">雲南、貴州料理</label></li>
+	<li><label><input type="checkbox" name="藥膳、養生食補" id="type17">藥膳、養生食補</label></li>
+	<li><label><input type="checkbox" name="羊肉爐、薑母鴨、麻油雞" id="type18">羊肉爐、薑母鴨、麻油雞</label></li>
+	<li><label>中式麵點</label>
+		<ul>
+		<li><label><input type="checkbox" name="中式麵點" id="type19">所有中式麵點</label></li>
+		<li><label><input type="checkbox" name="綜合麵點" id="type20">綜合麵點</label></li>
+		<li><label><input type="checkbox" name="炒麵" id="type21">炒麵</label></li>
+		<li><label><input type="checkbox" name="涼麵" id="type22">涼麵</label></li>
+		<li><label><input type="checkbox" name="乾麵" id="type23">乾麵</label></li>
+		<li><label><input type="checkbox" name="牛肉麵" id="type24">牛肉麵</label></li>
+		<li><label><input type="checkbox" name="刀削麵" id="type25">刀削麵</label></li>
+		<li><label><input type="checkbox" name="胡椒餅" id="type26">胡椒餅</label></li>
+		<li><label><input type="checkbox" name="饅頭、包子" id="type27">饅頭、包子</label></li>
+		<li><label><input type="checkbox" name="小籠包(湯包)" id="type28">小籠包(湯包)</label></li>
+		<li><label><input type="checkbox" name="水煎包、生煎包" id="type29">水煎包、生煎包</label></li>
+		<li><label>餡餅、蔥油餅、燒餅</label>
+			<ul>
+			<li><label><input type="checkbox" name="餡餅、蔥油餅、燒餅" id="type30">餡餅、蔥油餅、燒餅</label></li>
+			<li><label><input type="checkbox" name="餡餅" id="type182">餡餅</label></li>
+			<li><label><input type="checkbox" name="蔥油餅" id="type183">蔥油餅</label></li>
+			<li><label><input type="checkbox" name="燒餅" id="type184">燒餅</label></li>
+			</ul>
+		</li>
+		<li><label>水餃、蒸餃、鍋貼、扁食、餛飩、抄手</label>
+			<ul>
+			<li><label><input type="checkbox" name="水餃、蒸餃、鍋貼、扁食、餛飩、抄手" id="type31">所有水餃、蒸餃、鍋貼、扁食、餛飩、抄手</label></li>
+			<li><label><input type="checkbox" name="水餃" id="type179">水餃</label></li>
+			<li><label><input type="checkbox" name="蒸餃、鍋貼" id="type180">蒸餃、鍋貼</label></li>
+			<li><label><input type="checkbox" name="扁食、餛飩、抄手" id="type181">扁食、餛飩、抄手</label></li>
+			</ul>
+		</li>
+		</ul>
+	</li>
+	<li><label>米飯類</label>
+		<ul>
+		<li><label><input type="checkbox" name="米飯類" id="type32">所有米飯類</label></li>
+		<li><label><input type="checkbox" name="粽子" id="type33">粽子</label></li>
+		<li><label><input type="checkbox" name="油飯" id="type34">油飯</label></li>
+		<li><label><input type="checkbox" name="排骨飯" id="type35">排骨飯</label></li>
+		<li><label><input type="checkbox" name="滷肉飯" id="type36">滷肉飯</label></li>
+		<li><label><input type="checkbox" name="雞肉飯" id="type37">雞肉飯</label></li>
+		<li><label><input type="checkbox" name="綜合便當" id="type38">綜合便當</label></li>
+		</ul>
+	</li>
+	</ul>
+</li>
+<li><label>西式餐廳</label>
+	<ul>
+	<li><label><input type="checkbox" name="西式餐廳" id="type39">所有西式餐廳</label></li>
+	<li><label><input type="checkbox" name="法國風味" id="type40">法國風味</label></li>
+	<li><label>義式料理</label>
+		<ul>
+		<li><label><input type="checkbox" name="義式料理" id="type41">所有義式料理</label></li>
+		<li><label><input type="checkbox" name="綜合義式餐廳" id="type42">綜合義式餐廳</label></li>
+		<li><label><input type="checkbox" name="有提供Pizza的餐廳" id="type43">有提供Pizza的餐廳</label></li>
+		<li><label><input type="checkbox" name="百元級義大利麵" id="type44">百元級義大利麵</label></li>
+		</ul>
+	</li>
+	<li><label><input type="checkbox" name="德國料理" id="type45">德國料理</label></li>
+	<li><label><input type="checkbox" name="美式餐廳" id="type46">美式餐廳</label></li>
+	<li><label><input type="checkbox" name="墨西哥菜" id="type47">墨西哥菜</label></li>
+	<li><label><input type="checkbox" name="瑞士菜色" id="type48">瑞士菜色</label></li>
+	<li><label><input type="checkbox" name="瑞典菜色" id="type49">瑞典菜色</label></li>
+	<li><label><input type="checkbox" name="西班牙菜" id="type50">西班牙菜</label></li>
+	<li><label><input type="checkbox" name="希臘菜色" id="type51">希臘菜色</label></li>
+	<li><label><input type="checkbox" name="巴西菜色" id="type52">巴西菜色</label></li>
+	<li><label><input type="checkbox" name="荷蘭菜色" id="type53">荷蘭菜色</label></li>
+	<li><label><input type="checkbox" name="非洲料理" id="type54">非洲料理</label></li>
+	<li><label><input type="checkbox" name="摩洛哥菜" id="type55">摩洛哥菜</label></li>
+	<li><label><input type="checkbox" name="智利料理" id="type56">智利料理</label></li>
+	<li><label><input type="checkbox" name="俄羅斯菜" id="type57">俄羅斯菜</label></li>
+	<li><label><input type="checkbox" name="奧地利菜" id="type58">奧地利菜</label></li>
+	<li><label><input type="checkbox" name="英國與愛爾蘭" id="type59">英國與愛爾蘭</label></li>
+	<li><label>土耳其菜、伊朗料理、中東美食</label>
+		<ul>
+		<li><label><input type="checkbox" name="土耳其菜、伊朗料理、中東美食" id="type60">所有土耳其菜、伊朗料理、中東美食</label></li>
+		<li><label><input type="checkbox" name="土耳其菜" id="type61">土耳其菜</label></li>
+		<li><label><input type="checkbox" name="伊朗料理" id="type62">伊朗料理</label></li>
+		<li><label><input type="checkbox" name="中東美食" id="type63">中東美食</label></li>
+		</ul>
+	</li>
+	<li><label>牛排、岩燒、窯烤、鐵板燒</label>
+		<ul>
+		<li><label><input type="checkbox" name="牛排、岩燒、窯烤、鐵板燒" id="type64">所有牛排、岩燒、窯烤、鐵板燒</label></li>
+		<li><label><input type="checkbox" name="平價牛排專區(NT$100~350)" id="type65">平價牛排專區(NT$100~350)</label></li>
+		<li><label><input type="checkbox" name="平價鐵板燒專區(NT$100~350)" id="type66">平價鐵板燒專區(NT$100~350)</label></li>
+		</ul>
+	</li>
+	<li><label><input type="checkbox" name="一般西餐、綜合歐式料理" id="type67">一般西餐、綜合歐式料理</label></li>
+</ul>
+</li>
+<li><label>日韓料理</label>
+	<ul>
+	<li><label>日本料理</label>
+		<ul>
+		<li><label><input type="checkbox" name="日本料理" id="type68">所有日本料理</label></li>
+		<li><label><input type="checkbox" name="壽司" id="type69">壽司</label></li>
+		<li><label><input type="checkbox" name="迴轉壽司" id="type70">迴轉壽司</label></li>
+		<li><label><input type="checkbox" name="生魚片" id="type71">生魚片</label></li>
+		<li><label><input type="checkbox" name="炸豬排" id="type72">炸豬排</label></li>
+		<li><label><input type="checkbox" name="壽喜燒" id="type73">壽喜燒</label></li>
+		<li><label><input type="checkbox" name="鰻魚飯" id="type74">鰻魚飯</label></li>
+		<li><label><input type="checkbox" name="居酒屋" id="type75">居酒屋</label></li>
+		<li><label><input type="checkbox" name="可樂餅" id="type76">可樂餅</label></li>
+		<li><label><input type="checkbox" name="燒肉燒烤" id="type77">燒肉燒烤</label></li>
+		<li><label><input type="checkbox" name="日式咖哩" id="type78">日式咖哩</label></li>
+		<li><label><input type="checkbox" name="日式煎餅(大阪燒、廣島燒)" id="type79">日式煎餅(大阪燒、廣島燒)</label></li>
+		<li><label><input type="checkbox" name="和風洋食(蛋包飯)" id="type80">和風洋食(蛋包飯)</label></li>
+		<li><label><input type="checkbox" name="拉麵" id="type81">拉麵</label></li>
+		<li><label><input type="checkbox" name="烏龍麵、蕎麥麵" id="type82">烏龍麵、蕎麥麵</label></li>
+		<li><label><input type="checkbox" name="日本料理吃到飽" id="type83">日本料理吃到飽</label></li>
+		</ul>
+	</li>
+	<li><label><input type="checkbox" name="韓國料理" id="type84">韓國料理</label></li>
+	</ul>
+</li>
+<li><label>南洋印度</label>
+	<ul>
+	<li><label><input type="checkbox" name="南洋印度" id="type85">所有南洋印度</label></li>
+	<li><label><input type="checkbox" name="東南亞口味" id="type86">東南亞口味</label></li>
+	<li><label><input type="checkbox" name="印度料理、咖哩" id="type87">印度料理、咖哩</label></li>
+	</ul>
+</li>
+<li><label><input type="checkbox" name="飯店" id="type88">飯店</label></li>
+<li><label>吃到飽</label>
+	<ul>
+	<li><label><input type="checkbox" id="type163" name="吃到飽">所有吃到飽</label></li>
+	<li><label><input type="checkbox" id="type164" name="西式自助餐">西式自助餐</label></li>
+	<li><label><input type="checkbox" id="type165" name="鍋類吃到飽">鍋類吃到飽</label></li>
+	<li><label><input type="checkbox" id="type166" name="素食吃到飽">素食吃到飽</label></li>
+	<li><label><input type="checkbox" id="type167" name="宵夜吃到飽(晚上十點以後尚有營業的店家)">宵夜吃到飽(晚上十點以後尚有營業的店家)</label></li>
+	<li><label><input type="checkbox" id="type168" name="下午茶吃到飽">下午茶吃到飽</label></li>
+	<li><label><input type="checkbox" id="type169" name="中式熱炒吃到飽">中式熱炒吃到飽</label></li>
+	<li><label><input type="checkbox" id="type170" name="南洋料理吃到飽">南洋料理吃到飽</label></li>
+	<li><label><input type="checkbox" id="type171" name="印度料理吃到飽">印度料理吃到飽</label></li>
+	<li><label><input type="checkbox" id="type172" name="蒙古烤肉吃到飽">蒙古烤肉吃到飽</label></li>
+	<li><label><input type="checkbox" id="type173" name="港式飲茶吃到飽">港式飲茶吃到飽</label></li>
+	<li><label><input type="checkbox" id="type174" name="義大利麵吃到飽">義大利麵吃到飽</label></li>
+	<li><label><input type="checkbox" id="type175" name="日本料理吃到飽">日本料理吃到飽</label></li>
+	<li><label><input type="checkbox" id="type176" name="中式熱炒吃到飽">日韓式燒肉吃到飽</label></li>
+	<li><label><input type="checkbox" id="type177" name="義式披薩吃到飽">義式披薩吃到飽</label></li>
+	<li><label><input type="checkbox" id="type178" name="美式炸雞、披薩吃到飽">美式炸雞、披薩吃到飽</label></li>
+	</ul>
+</li>
+<li><label>特殊餐廳</label>
+	<ul>
+	<li><label><input type="checkbox" id="type89" name="特殊餐廳">所有特殊餐廳</label></li>
+	<li><label><input type="checkbox" id="type90" name="公益餐廳">公益餐廳</label></li>
+	<li><label><input type="checkbox" id="type91" name="溫泉餐廳">溫泉餐廳</label></li>
+	<li><label><input type="checkbox" id="type92" name="包廂餐廳">包廂餐廳</label></li>
+	<li><label>有貓狗的餐廳</label>
+		<ul>
+		<li><label><input type="checkbox" name="有貓狗的餐廳" id="type93">所有有貓狗的餐廳</label></li>
+		<li><label><input type="checkbox" name="有貓咪的店" id="type94">有貓咪的店</label></li>
+		<li><label><input type="checkbox" name="有狗狗的店" id="type95">有狗狗的店</label></li>
+		<li><label><input type="checkbox" name="可帶貓狗的店" id="type96">可帶貓狗的店</label></li>
+		</ul>
+	</li>
+	<li><label><input type="checkbox" name="特殊餐飲主題餐廳" id="type97">特殊餐飲主題餐廳</label></li>
+	<li><label><input type="checkbox" name="特殊服務、活動餐廳" id="type98">特殊服務、活動餐廳</label></li>
+	<li><label><input type="checkbox" name="算命、占卜餐廳" id="type99">算命、占卜餐廳</label></li>
+	<li><label><input type="checkbox" name="貓空泡茶、茶食餐廳" id="type100">貓空泡茶、茶食餐廳</label></li>
+	<li><label><input type="checkbox" name="可租借單車餐廳" id="type101">可租借單車餐廳</label></li>
+	<li><label><input type="checkbox" name="特殊服務、活動餐廳" id="type102">特殊服務、活動餐廳</label></li>
+	<li><label><input type="checkbox" name="特殊建築、裝潢與景觀餐廳" id="type103">特殊建築、裝潢與景觀餐廳</label></li>
+	<li><label><input type="checkbox" name="可無線上網或用個人電腦店家" id="type104">可無線上網或用個人電腦店家</label></li>
+	<li><label><input type="checkbox" name="電視、電影拍攝背景或藝人開設餐廳" id="type105">電視、電影拍攝背景或藝人開設餐廳</label></li>
+	<li><label><input type="checkbox" name="有單槍投影、視聽設備、可看電視轉播餐廳" id="type106">有單槍投影、視聽設備、可看電視轉播餐廳</label></li>
+	<li><label><input type="checkbox" name="可聽音樂、有現場演奏、附有卡拉OK設備的餐廳" id="type107">可聽音樂、有現場演奏、附有卡拉OK設備的餐廳</label></li>
+	</ul>
+</li>
+<li><label><input type="checkbox" name="素食餐廳" id="type108">素食餐廳</label></li>
+<li><label>火鍋</label>
+	<ul>
+	<li><label><input type="checkbox" name="火鍋" id="type109">所有火鍋</label></li>
+	<li><label><input type="checkbox" id="type110" name="涮涮鍋">涮涮鍋</label></li>
+	<li><label><input type="checkbox" id="type111" name="麻辣鍋">麻辣鍋</label></li>
+	<li><label><input type="checkbox" id="type112" name="瑞士鍋">瑞士鍋</label></li>
+	<li><label><input type="checkbox" id="type113" name="酸菜白肉鍋">酸菜白肉鍋</label></li>
+	<li><label><input type="checkbox" id="type114" name="南洋鍋">南洋鍋</label></li>
+	<li><label><input type="checkbox" id="type115" name="特殊鍋類">特殊鍋類</label></li>
+	<li><label><input type="checkbox" id="type116" name="火烤兩吃">火烤兩吃</label></li>
+	</ul>
+</li>
+<li><label><input type="checkbox" id="type117" name="夜市">夜市</label></li>
+<li><label><input type="checkbox" id="type118" name="早餐店">早餐店</label></li>
+<li><label>啤酒屋、PUB</label>
+	<ul>
+	<li><label><input type="checkbox" id="type119" name="啤酒屋、PUB">所有啤酒屋、PUB</label></li>
+	<li><label><input type="checkbox" id="type120" name="Pub、Bar">Pub、Bar</label></li>
+	<li><label><input type="checkbox" id="type121" name="啤酒屋">啤酒屋</label></li>
+	</ul>
+</li>
+<li><label><input type="checkbox" id="type122" name="速食店、超商">速食店、超商</label></li>
+<li><label>簡餐、咖啡、下午茶</label>
+	<ul>
+	<li><label><input type="checkbox" id="type123" name="Pub、Bar">所有簡餐、咖啡、下午茶</label></li>
+	<li><label><input type="checkbox" id="type124" name="連鎖店">連鎖店</label></li>
+	</ul>
+</li>
+<li><label>攤販小吃、各地特色美食</label>
+	<ul>
+	<li><label><input type="checkbox" id="type125" name="攤販小吃、各地特色美食">所有攤販小吃、各地特色美食</label></li>
+	<li><label><input type="checkbox" id="type126" name="涼麵">涼麵</label></li>
+	<li><label><input type="checkbox" id="type127" name="乾麵">乾麵</label></li>
+	<li><label><input type="checkbox" id="type128" name="碗粿">碗粿</label></li>
+	<li><label><input type="checkbox" id="type129" name="飯糰">飯糰</label></li>
+	<li><label><input type="checkbox" id="type130" name="餡餅">餡餅</label></li>
+	<li><label><input type="checkbox" id="type131" name="豆花">豆花</label></li>
+	<li><label><input type="checkbox" id="type132" name="滷味">滷味</label></li>
+	<li><label><input type="checkbox" id="type133" name="雞排">雞排</label></li>
+	<li><label><input type="checkbox" id="type134" name="饅頭">饅頭</label></li>
+	<li><label><input type="checkbox" id="type135" name="肉圓">肉圓</label></li>
+	<li><label><input type="checkbox" id="type136" name="蛋餅">蛋餅</label></li>
+	<li><label><input type="checkbox" id="type137" name="鹽酥雞">鹽酥雞</label></li>
+	<li><label><input type="checkbox" id="type138" name="燒烤">燒烤</label></li>
+	<li><label><input type="checkbox" id="type139" name="胡椒餅">胡椒餅</label></li>
+	<li><label><input type="checkbox" id="type140" name="酒釀餅">酒釀餅</label></li>
+	<li><label><input type="checkbox" id="type141" name="棺材板">棺材板</label></li>
+	<li><label><input type="checkbox" id="type142" name="雞蛋糕">雞蛋糕</label></li>
+	<li><label><input type="checkbox" id="type143" name="蚵仔煎">蚵仔煎</label></li>
+	<li><label><input type="checkbox" id="type144" name="蔥油餅">蔥油餅</label></li>
+	<li><label><input type="checkbox" id="type145" name="臭豆腐">臭豆腐</label></li>
+	<li><label><input type="checkbox" id="type146" name="米粉湯">米粉湯</label></li>
+	<li><label><input type="checkbox" id="type147" name="排骨飯">排骨飯</label></li>
+	<li><label><input type="checkbox" id="type148" name="滷肉飯">滷肉飯</label></li>
+	<li><label><input type="checkbox" id="type149" name="雞肉飯">雞肉飯</label></li>
+	<li><label><input type="checkbox" id="type150" name="藥燉排骨">藥燉排骨</label></li>
+	<li><label><input type="checkbox" id="type151" name="春捲、潤餅">春捲、潤餅</label></li>
+	<li><label><input type="checkbox" id="type152" name="湯圓、元宵">湯圓、元宵</label></li>
+	<li><label><input type="checkbox" id="type153" name="黑輪、甜不辣">黑輪、甜不辣</label></li>
+	<li><label><input type="checkbox" id="type154" name="大腸、蚵仔麵線">大腸、蚵仔麵線</label></li>
+	<li><label><input type="checkbox" id="type155" name="紅豆餅、車輪餅">紅豆餅、車輪餅</label></li>
+	<li><label><input type="checkbox" id="type156" name="水煎包、生煎包">水煎包、生煎包</label></li>
+	<li><label><input type="checkbox" id="type157" name="麻辣鴨血、臭豆腐">麻辣鴨血、臭豆腐</label></li>
+	<li><label><input type="checkbox" id="type158" name="肉羹、魷魚羹、各式羹類">肉羹、魷魚羹、各式羹類</label></li>
+	</ul>
+</li>
+<li><label>甜點、蛋糕、麵包、冰品、飲料</label>
+	<ul>
+	<li><label><input type="checkbox" id="type159" name="甜點、蛋糕、麵包、冰品、飲料">所有甜點、蛋糕、麵包、冰品、飲料</label></li>
+	<li><label><input type="checkbox" id="type160" name="珍珠奶茶、果汁、純飲料">珍珠奶茶、果汁、純飲料</label></li>
+	<li><label><input type="checkbox" id="type161" name="甜點、蛋糕、麵包">甜點、蛋糕、麵包</label></li>
+	<li><label><input type="checkbox" id="type162" name="冰淇淋、冰點">冰淇淋、冰點</label></li>
+	</ul>
+</li>
+</ul>
+<script type="text/javascript">
+//ddtreemenu.createTree(treeid, enablepersist, opt_persist_in_days (default is 1))
+ddtreemenu.createTree("treemenu1", true)
+</script>
+
+    </div>
+
+<img src="PIC/price.png" onclick="prices.style.display=prices.style.display=='none'?'':'none';pressbutton(this);" /><br/>
+	<div id=prices style="display:none">
+        <form id="priceselect" name="priceselect" method="post" action="">
+        	最低價位:<input type="text" name="theprice_min" id="theprice_min" value="無限制"><br/>
+            最高價位:<input type="text" name="theprice_max" id="theprice_max" value="無限制"><br/>
+        </form>
+    </div>
+    
+<img src="PIC/distance.png" onclick="distances.style.display=distances.style.display=='none'?'':'none';pressbutton(this);" /><br/>
+	<div id=distances style="display:none">
+        <form id="distanceselect" name="distanceselect" method="post" action="">
+        	<img src="PIC/setstart.png" name='setornot' id="setornot" onclick="changesetpic(this);parent.setstartchange();" /><img src="PIC/clean.png" onmousedown="pressbutton(this);" name='cleanset' id="cleanset" onclick="parent.cleansetstart();pressbutton(this);" /><br/>
+            設距離:<input type="text" name="setDistance" id="setDistance" value="無限制">公尺<br/>
+        </form>
+    </div>
+
+<!--img src="PIC/rank.png" onclick="ranks.style.display=ranks.style.display=='none'?'':'none';pressbutton(this);" /><br/>
+	<div id=ranks style="display:none">
+        <form id="rankselect" name="rankselect" method="post" action="">
+       	  <label>
+        	  <img src="PIC/heart.png" name='heart1' id="heart1" onclick="heart1f();" /><img src="PIC/heartnull.png" name='heart2' id="heart2" onclick="heart2f();" /><img src="PIC/heartnull.png" name='heart3' id="heart3" onclick="heart3f();" /><img src="PIC/heartnull.png" name='heart4' id="heart4" onclick="heart4f();" /><img src="PIC/heartnull.png" name='heart5' id="heart5" onclick="heart5f();" /><br/>
+       	  </label>
+        </form>
+    </div-->
+
+<table width="200" border="0">
+  <tr>
+    <td><img src="PIC/fooodle.png" width="120" onmousedown="pressbutton(this);" onclick="letsfoodle();pressbutton(this);" /></td>
+    <td><img src="PIC/cleanmarker.png" onclick="parent.clearOverlays();" /></td>
+  </tr>
+</table><br/>
+</body>
+</html>

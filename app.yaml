@@ -1,0 +1,12 @@
+application: foodletaiwan
+version: 469
+runtime: python
+api_version: 1
+
+handlers:
+- url: /source
+  static_dir: source
+- url: /source/PIC
+  static_dir: source/PIC
+- url: /.*
+  script: foodletaiwan.py
